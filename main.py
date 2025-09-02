@@ -85,9 +85,13 @@ async def main():
         logger.error("DISCORD_TOKEN not found in environment variables")
         return
     
-    if not BotConfig.OPENAI_API_KEY:
-        logger.error("OPENAI_API_KEY not found in environment variables")
+    if not BotConfig.GEMINI_API_KEY:
+        logger.error("GEMINI_API_KEY not found in environment variables")
         return
+    
+    # OpenAI is optional for backwards compatibility
+    if not BotConfig.OPENAI_API_KEY:
+        logger.warning("OPENAI_API_KEY not found - OpenAI features will be disabled")
     
     # Create and run bot
     bot = AIDiscordBot()
